@@ -1,6 +1,7 @@
 import Cloud from "@/assets/Cloud.png";
 import Climate from "@/shared/Climate";
 import { SELECTED_PAGE } from "@/shared/types";
+import { motion } from "framer-motion";
 
 type Props = {
   setSelectedPage: (value: SELECTED_PAGE) => void;
@@ -14,10 +15,21 @@ const Home = ({ setSelectedPage }: Props) => {
       id="home"
       className="xs:text-white md:text-black py-12 m-auto w-auto"
     >
-      <div className={`${flexBetween} top-0 z-30 w-full py-12 flex-col`}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 1 }}
+        variants={{
+          hidden: { opacity: 0, y: 50 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        onViewportEnter={() => setSelectedPage(SELECTED_PAGE.HOME)}
+        className={`${flexBetween} top-0 z-30 w-full py-12 flex-col`}
+      >
         <div className="py-12 gap-10 text-2xl">
           {/* Location */}
-          <div className={`${centerDiv} md:pt-4`}>
+          <div className={`${centerDiv} md:pt-4 xs:pt-12`}>
             <p className="text-xl">Belfast, Northern Ireland</p>
           </div>
           {/* Date & Time */}
@@ -42,7 +54,7 @@ const Home = ({ setSelectedPage }: Props) => {
           {/* Climate Component */}
           <Climate></Climate>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

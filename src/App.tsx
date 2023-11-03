@@ -29,7 +29,7 @@ const App = () => {
         setSelectedPage={setSelectedPage}
         isTopOfPage={isTopOfPage}
       />
-      <div className="xs:bg-blue-300 md:bg-white sm:bg-blue-300 h-[75%]">
+      <div className="xs:bg-blue-300 md:bg-white sm:bg-blue-300 h-[80%]">
         <Home setSelectedPage={setSelectedPage} />
       </div>
     </div>
