@@ -1,7 +1,11 @@
 import { Drop, Umbrella, Wind } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 
-const Climate = () => {
+type Prop = {
+  data: any;
+};
+
+const Climate = ({ data }: Prop) => {
   const centerDiv = "items-center justify-center flex flex-col";
   return (
     <motion.div
@@ -20,19 +24,19 @@ const Climate = () => {
         <div className={`${centerDiv}`}>
           <Drop />
           <p>Humidity</p>
-          <p>62%</p>
+          {data.main && <p>{data.main.humidity}%</p>}
         </div>
         {/* Precipitation */}
         <div className={`${centerDiv}`}>
           <Umbrella />
-          <p>Precipitation</p>
-          <p>10%</p>
+          <p>Pressure</p>
+          {data.main && <p>{data.main.pressure} atm</p>}
         </div>
         {/* Windy */}
         <div className={`${centerDiv}`}>
           <Wind />
           <p>Wind Speed</p>
-          <p>18 km/h</p>
+          {data.wind && <p>{data.wind.speed} km/h</p>}
         </div>
       </div>
     </motion.div>

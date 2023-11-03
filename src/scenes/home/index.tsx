@@ -5,16 +5,35 @@ import { motion } from "framer-motion";
 
 type Props = {
   setSelectedPage: (value: SELECTED_PAGE) => void;
+  data: any;
+  timeData: any;
 };
 
-const Home = ({ setSelectedPage }: Props) => {
+const Home = ({ setSelectedPage, data, timeData }: Props) => {
   const flexBetween = "flex items-center justify-between";
   const centerDiv = "flex items-center justify-center";
+
+  const date = new Date(timeData.date_time_txt);
+  // Format date
+  const formattedDate = date.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  // Format time
+  const formattedTime = date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+
+  // Join date and time
+  const formattedDateTime = `${formattedDate} ${formattedTime}`;
+
   return (
-    <section
-      id="home"
-      className="xs:text-white md:text-black py-12 m-auto w-auto"
-    >
+    <section id="home" className="xs:text-white md:text-black  m-auto w-auto">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -25,16 +44,20 @@ const Home = ({ setSelectedPage }: Props) => {
           visible: { opacity: 1, y: 0 },
         }}
         onViewportEnter={() => setSelectedPage(SELECTED_PAGE.HOME)}
-        className={`${flexBetween} top-0 z-30 w-full py-12 flex-col`}
+        className={`${flexBetween} top-0 z-30 w-full py-6 flex-col`}
       >
-        <div className="py-12 gap-10 text-2xl">
+        <div className="gap-10 text-2xl">
           {/* Location */}
-          <div className={`${centerDiv} md:pt-4 xs:pt-12`}>
-            <p className="text-xl">Belfast, Northern Ireland</p>
+          <div className={`${centerDiv} `}>
+            {data && data.sys && (
+              <p className="text-xl">
+                {data.name},{data.sys.country}
+              </p>
+            )}
           </div>
           {/* Date & Time */}
           <div className={`${centerDiv}`}>
-            <p className="text-sm ">Today, 2nd November. 11AM</p>
+            {timeData && <p className="text-sm ">{formattedDateTime}</p>}
           </div>
 
           {/* Cloud image */}
@@ -43,16 +66,18 @@ const Home = ({ setSelectedPage }: Props) => {
           </div>
           {/* Temperature */}
           <div className={`${centerDiv}`}>
-            <h1 className="text-9xl">20&deg;C</h1>
+            {data.main && (
+              <h1 className="text-9xl">{data.main.temp.toFixed()}&deg;C</h1>
+            )}
           </div>
 
           {/* Weather */}
           <div className={`${centerDiv}`}>
-            <p className="text-md">Cloudy</p>
+            {data.weather && <p className="text-md">{data.weather[0].main}</p>}
           </div>
 
           {/* Climate Component */}
-          <Climate></Climate>
+          <Climate data={data}></Climate>
         </div>
       </motion.div>
     </section>
