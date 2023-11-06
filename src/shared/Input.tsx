@@ -20,7 +20,7 @@ const Input = ({ value, onChange, onKeyDown }: Prop) => {
       }}
       className="pt-6"
     >
-      <form>
+      <form className="border-none">
         <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"></label>
         <div className="relative border-none">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -32,7 +32,7 @@ const Input = ({ value, onChange, onKeyDown }: Prop) => {
             onKeyDown={onKeyDown}
             type="search"
             id="default-search"
-            className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50"
+            className="block w-full p-4 pl-10 text-sm text-gray-900 border-none rounded-full bg-gray-50"
             placeholder="Search Locations..."
             required
           />
