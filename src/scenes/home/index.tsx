@@ -16,7 +16,7 @@ const Home = ({ setSelectedPage, data, timeData }: Props) => {
   const date = new Date(timeData.date_time_txt);
   let formattedDateTime;
 
-  if (date instanceof Date && !isNaN(date)) {
+  if (date instanceof Date && !isNaN(date.getTime())) {
     // Format date
     const formattedDate = date?.toLocaleDateString("en-US", {
       weekday: "long",
