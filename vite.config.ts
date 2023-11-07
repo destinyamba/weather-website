@@ -8,7 +8,7 @@ export default defineConfig({
   resolve: {
     alias: [{ find: "@", replacement: path.resolve(__dirname, 'src')}]
   },
-  base:'/weather-wizzard/',
+  base:'/weather-website/',
   build: {
     outDir: 'build'
   }
