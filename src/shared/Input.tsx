@@ -1,15 +1,18 @@
 import { MagnifyingGlass } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
+import { SELECTED_PAGE } from "./types";
 
 type Prop = {
   value: string;
   onChange: any;
   onKeyDown: any;
+  setSelectedPage: (value: SELECTED_PAGE) => void;
 };
 
-const Input = ({ value, onChange, onKeyDown }: Prop) => {
+const Input = ({ value, onChange, onKeyDown, setSelectedPage }: Prop) => {
   return (
     <motion.div
+      id="home"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}
@@ -18,7 +21,8 @@ const Input = ({ value, onChange, onKeyDown }: Prop) => {
         hidden: { opacity: 0, y: 50 },
         visible: { opacity: 1, y: 0 },
       }}
-      className="pt-6"
+      onViewportEnter={() => setSelectedPage(SELECTED_PAGE.HOME)}
+      className="py-12 mt-12"
     >
       <form className="border-none">
         <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"></label>

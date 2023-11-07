@@ -37,7 +37,7 @@ const Home = ({ setSelectedPage, data, timeData }: Props) => {
   } else formattedDateTime = "";
 
   return (
-    <section id="home" className="xs:text-white md:text-black  m-auto w-auto">
+    <section id="home" className="xs:text-white md:text-black m-auto w-auto">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -48,9 +48,9 @@ const Home = ({ setSelectedPage, data, timeData }: Props) => {
           visible: { opacity: 1, y: 0 },
         }}
         onViewportEnter={() => setSelectedPage(SELECTED_PAGE.HOME)}
-        className={`${flexBetween} top-0 z-30 w-full py-6 flex-col`}
+        className={`${flexBetween} top-0 z-30 w-full pt-6 flex-col`}
       >
-        <div className="gap-10 text-2xl">
+        <div className="relative gap-10 text-2xl mt-4">
           {/* Location */}
           <div className={`${centerDiv} `}>
             {data && data.sys && (
@@ -69,14 +69,16 @@ const Home = ({ setSelectedPage, data, timeData }: Props) => {
             <img alt="cloud" src={Cloud} />
           </div>
           {/* Temperature */}
-          <div className={`${centerDiv}`}>
+          <div className={`${centerDiv} mt-4`}>
             {data.main && (
-              <h1 className="text-9xl">{data.main.temp.toFixed()}&deg;C</h1>
+              <h1 className="md:text-9xl xs:text-7xl">
+                {data.main.temp.toFixed()}&deg;C
+              </h1>
             )}
           </div>
 
           {/* Weather */}
-          <div className={`${centerDiv}`}>
+          <div className={`${centerDiv} relative`}>
             {data.weather && <p className="text-md">{data.weather[0].main}</p>}
           </div>
 
