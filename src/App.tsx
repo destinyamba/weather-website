@@ -5,6 +5,7 @@ import { SELECTED_PAGE } from "./shared/types";
 import axios from "axios";
 import Input from "./shared/Input";
 import Forecast from "./scenes/forecast";
+import Climate from "./shared/Climate";
 
 const App = () => {
   const [data, setData] = useState({});
@@ -78,7 +79,7 @@ const App = () => {
         isTopOfPage={isTopOfPage}
       />
 
-      <div className="xs:bg-blue-300 md:bg-white sm:bg-blue-300 h-[83%] relative">
+      <div className="xs:bg-blue-300 md:bg-white sm:bg-blue-300 h-[83%] md:h-auto relative">
         <div className="xs:pt-24 h-1/4 flex flex-col items-center justify-center relative ">
           <Input
             value={location}
@@ -102,6 +103,7 @@ const App = () => {
           timeData={timeData}
         />
       </div>
+      <Climate data={data}></Climate>
       <Forecast
         selectedPage={selectedPage}
         setSelectedPage={setSelectedPage}

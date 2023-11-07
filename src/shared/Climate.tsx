@@ -19,7 +19,7 @@ const Climate = ({ data }: Prop) => {
       }}
       className={`${centerDiv} pt-6 relative`}
     >
-      <div className="bg-blue-100 rounded-lg text-gray-800 text-sm w-4/5 flex gap-8 items-center justify-center py-8 ">
+      <div className="bg-blue-100 rounded-lg text-gray-800 text-sm w-4/5 flex gap-8 items-center justify-center py-8 max-w-2xl ">
         {/* Humidity */}
         <div className={`${centerDiv}`}>
           <Drop />

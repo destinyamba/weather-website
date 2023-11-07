@@ -81,9 +81,6 @@ const Home = ({ setSelectedPage, data, timeData }: Props) => {
           <div className={`${centerDiv} relative`}>
             {data.weather && <p className="text-md">{data.weather[0].main}</p>}
           </div>
-
-          {/* Climate Component */}
-          <Climate data={data}></Climate>
         </div>
       </motion.div>
     </section>
