@@ -1,5 +1,4 @@
 import Cloud from "@/assets/Cloud.png";
-import Climate from "@/shared/Climate";
 import { SELECTED_PAGE } from "@/shared/types";
 import { motion } from "framer-motion";
 
