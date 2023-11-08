@@ -9,7 +9,4 @@ export default defineConfig({
     alias: [{ find: "@", replacement: path.resolve(__dirname, 'src')}]
   },
   base:'/weather-website/',
-  build: {
-    outDir: 'build'
-  }
 })
