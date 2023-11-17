@@ -6,6 +6,7 @@ import axios from "axios";
 import Input from "./shared/Input";
 import Forecast from "./scenes/forecast";
 import Climate from "./shared/Climate";
+import WeeklyForecast from "./scenes/forecast/WeeklyForecast";
 
 const App = () => {
   const [data, setData] = useState({});
@@ -23,7 +24,6 @@ const App = () => {
         .get(weatherApi)
         .then((response) => {
           setData(response.data);
-          console.log(response.data);
         })
         .catch((error) => {
           console.error("Error fetching weather data:", error);
@@ -32,7 +32,6 @@ const App = () => {
         .get(dateAndTimeApi)
         .then((response) => {
           setTimeData(response.data);
-          console.log(response.data);
         })
         .catch((error) => {
           console.error("Error fetching date and time data:", error);
@@ -40,10 +39,8 @@ const App = () => {
       axios
         .get(forecastApi)
         .then((response) => {
-          console.log(response.data.list.slice(0, 4));
-          setForecastData(response.data.list.slice(0, 4));
+          setForecastData(response.data.list);
         })
-        // .then((res) => setForecastData(res.data.list.slice(0, 4)))
         .catch((error) => {
           console.error("Error fetching forecast data:", error);
         });
@@ -109,6 +106,7 @@ const App = () => {
         setSelectedPage={setSelectedPage}
         forecastData={forecastData}
       />
+      <WeeklyForecast forecastData={forecastData} data={data} />
     </div>
   );
 };

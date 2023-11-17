@@ -28,7 +28,7 @@ const Forecast = ({ selectedPage, setSelectedPage, forecastData }: Props) => {
     return formattedTime;
   }
   return (
-    <section id="forecast" className="px-8 mx-auto max-w-2xl min-h-screen">
+    <section id="forecast" className="px-12 mx-auto max-w-3xl ">
       {forecastData && forecastData.length! > 0 && (
         <div className="pt-2">
           <motion.div
@@ -41,7 +41,7 @@ const Forecast = ({ selectedPage, setSelectedPage, forecastData }: Props) => {
               visible: { opacity: 1, y: 0 },
             }}
             onViewportEnter={() => setSelectedPage(SELECTED_PAGE.FORECAST)}
-            className="flex justify-between"
+            className="flex justify-between mx-w-2xl"
           >
             <p className="font-sembold">Today</p>
             <p className="underline">
@@ -61,34 +61,36 @@ const Forecast = ({ selectedPage, setSelectedPage, forecastData }: Props) => {
               hidden: { opacity: 0, y: 50 },
               visible: { opacity: 1, y: 0 },
             }}
-            className="grid grid-cols-4 gap-4 pt-6 pl-4 md:pl-16"
+            className="grid grid-cols-4 gap-4 pt-6 pl-4 mr-4"
           >
             {forecastData &&
-              forecastData.map(
-                (forecast: {
-                  main: any;
-                  weather: any;
-                  dt: number;
-                  temp: number;
-                  dt_txt: any;
-                }) => (
-                  <div
-                    key={forecast.dt}
-                    className="flex flex-col items-center justify-center"
-                  >
-                    <img
-                      alt="weather-icon"
-                      src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`}
-                    />
-                    <p className={forecastDiv}>
-                      {Math.floor(forecast.main.temp)}&deg;C
-                    </p>
-                    <p className="text-xs">
-                      {formatDateToTime(forecast.dt_txt)}
-                    </p>
-                  </div>
-                )
-              )}
+              forecastData
+                .slice(0, 4)
+                .map(
+                  (forecast: {
+                    main: any;
+                    weather: any;
+                    dt: number;
+                    temp: number;
+                    dt_txt: any;
+                  }) => (
+                    <div
+                      key={forecast.dt}
+                      className="flex flex-col items-center justify-center"
+                    >
+                      <img
+                        alt="weather-icon"
+                        src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`}
+                      />
+                      <p className={forecastDiv}>
+                        {Math.floor(forecast.main.temp)}&deg;C
+                      </p>
+                      <p className="text-xs">
+                        {formatDateToTime(forecast.dt_txt)}
+                      </p>
+                    </div>
+                  )
+                )}
           </motion.div>
         </div>
       )}
