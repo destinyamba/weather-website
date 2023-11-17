@@ -10,20 +10,20 @@ const WeeklyForecast = ({ data, forecastData }: Props) => {
 
   // Filter forecasts to unique days
   const uniqueDays = new Set<number>();
-
-  forecastData.forEach((forecast: any) => {
-    const day = new Date(forecast.dt_txt).getDate();
-    uniqueDays.add(day);
-  });
-
   const filteredForecasts: any[] = [];
+  if (forecastData) {
+    forecastData.forEach((forecast: any) => {
+      const day = new Date(forecast.dt_txt).getDate();
+      uniqueDays.add(day);
+    });
 
-  uniqueDays.forEach((day) => {
-    const forecast = forecastData.find(
-      (f: any) => new Date(f.dt_txt).getDate() === day
-    );
-    filteredForecasts.push(forecast);
-  });
+    uniqueDays.forEach((day) => {
+      const forecast = forecastData.find(
+        (f: any) => new Date(f.dt_txt).getDate() === day
+      );
+      filteredForecasts.push(forecast);
+    });
+  }
 
   return (
     <section
@@ -54,6 +54,7 @@ const WeeklyForecast = ({ data, forecastData }: Props) => {
       {/* Forecast fore next 5 days */}
       <div className="mt-12 mx-auto max-w-2xl px-12 flex-col items-center justify-between">
         {forecastData &&
+          filteredForecasts &&
           filteredForecasts.map((forecast: any, index: number) => (
             <>
               <div
@@ -74,7 +75,7 @@ const WeeklyForecast = ({ data, forecastData }: Props) => {
                     width={48}
                     src={`https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`}
                   />
-                  <p>{forecast.main.temp} °C</p>
+                  <p>{Math.floor(forecast.main.temp)} °C</p>
                 </div>
               </div>
             </>
